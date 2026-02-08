@@ -3,42 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AKI CHỌN NHẠC 🎵✨</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Chọn nhạc cùng Aki 🎵✨</title>
+    <style>
+        /* Tông màu Pastel Cute */
+        :root {
+            --primary: #ff9a9e;
+            --secondary: #fad0c4;
+            --bg: #fff5f7;
+            --text: #5d5d5d;
+            --card-bg: #ffffff;
+            --accent: #a1c4fd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 { 
+            color: #ff6b81; 
+            margin-bottom: 5px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #a18cd1;
+        }
+
+        .controls {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 154, 158, 0.2);
+            margin-bottom: 30px;
+        }
+
+        #searchBar {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ffe4e6;
+            border-radius: 15px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        #searchBar:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 154, 158, 0.2);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            background: #fdfcfb;
+            cursor: pointer;
+            transition: 0.4s;
+            font-weight: 600;
+            color: #777;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-3px);
+            background: var(--secondary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 6px 12px rgba(255, 154, 158, 0.3);
+        }
+
+        .song-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .song-card {
+            background: var(--card-bg);
+            padding: 25px 15px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 2px solid #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .song-card::before {
+            content: "✨";
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+
+        .song-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 12px 20px rgba(255, 154, 158, 0.15);
+        }
+
+        .song-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: block;
+            color: #444;
+        }
+
+        .genre-tag {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 10px;
+            background: #f0f0f0;
+            color: #888;
+        }
+
+        /* Màu riêng cho từng thể loại */
+        .tag-xapxinh { background: #ffeaa7; color: #d35400; }
+        .tag-var { background: #fab1a0; color: #c0392b; }
+        .tag-ballad { background: #dff9fb; color: #130f40; }
+        .tag-songca { background: #f8a5c2; color: #5f27cd; }
+
+        .count-info {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+    </style>
 </head>
 <body>
 
-    <div id="sakura-container"></div>
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3Ym95amR6Znd4Znd4Znd4Znd4Znd4Znd4Znd4Znd4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKMGpx4GHlDuy8o/giphy.gif" class="cat-mascot" alt="Cute Cat">
-
     <header>
-        <h1>AKI CHỌN NHẠC 🎀</h1>
-        <p class="subtitle">Choose your song!</p>
+        <h1>Nhạc 🎀</h1>
+        <p class="subtitle">Chọn bài nhanh lên dmm 🌸</p>
     </header>
-
-    <div class="controls">
-        <input type="text" id="searchBar" placeholder="🔍 Tìm tên bài hát cậu thích..." onkeyup="filterSongs()">
-        
-        <div class="filter-group">
-            <button class="filter-btn active" onclick="setGenre('All')">Tất cả ✨</button>
-            <button class="filter-btn" onclick="setGenre('Nhạc xập xình')">Xập Xình 🔥</button>
-            <button class="filter-btn" onclick="setGenre('Nhạc ballad')">Ballad ☁️</button>
-            <button class="filter-btn" onclick="setGenre('Song ca')">Song Ca 👫</button>
-            <button class="filter-btn" onclick="setGenre('Nhạc var')">Nhạc Var 🃏</button>
-        </div>
-    </div>
-
-    <div class="song-container" id="songList"></div>
-    <div class="count-info" id="countInfo"></div>
-
-    <div id="lyricsModal" class="modal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle">Tên bài hát</h2>
-            <div id="modalBody" class="lyrics-box"></div>
-            <p class="modal-footer">Let's sing✨🌸</p>
-        </div>
-    </div>
 
     <div class="music-control" onclick="toggleMusic()">
         <span id="music-icon">🔇</span>
