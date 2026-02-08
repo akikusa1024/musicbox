@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKI CHỌN NHẠC 🎵✨</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="sakura-container"></div>
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3Ym95amR6Znd4Znd4Znd4Znd4Znd4Znd4Znd4Znd4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKMGpx4GHlDuy8o/giphy.gif" class="cat-mascot" alt="Cute Cat">
+
+    <header>
+        <h1>AKI CHỌN NHẠC 🎀</h1>
+        <p class="subtitle">Choose your song!</p>
+    </header>
+
+    <div class="controls">
+        <input type="text" id="searchBar" placeholder="🔍 Tìm tên bài hát cậu thích..." onkeyup="filterSongs()">
+        
+        <div class="filter-group">
+            <button class="filter-btn active" onclick="setGenre('All')">Tất cả ✨</button>
+            <button class="filter-btn" onclick="setGenre('Nhạc xập xình')">Xập Xình 🔥</button>
+            <button class="filter-btn" onclick="setGenre('Nhạc ballad')">Ballad ☁️</button>
+            <button class="filter-btn" onclick="setGenre('Song ca')">Song Ca 👫</button>
+            <button class="filter-btn" onclick="setGenre('Nhạc var')">Nhạc Var 🃏</button>
+        </div>
+    </div>
+
+    <div class="song-container" id="songList"></div>
+    <div class="count-info" id="countInfo"></div>
+
+    <div id="lyricsModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Tên bài hát</h2>
+            <div id="modalBody" class="lyrics-box"></div>
+            <p class="modal-footer">Let's sing✨🌸</p>
+        </div>
+    </div>
+
+    <div class="music-control" onclick="toggleMusic()">
+        <span id="music-icon">🔇</span>
+        <audio id="bg-music" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
